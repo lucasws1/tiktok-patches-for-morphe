@@ -253,10 +253,21 @@ val enableOpenDebugPatch = bytecodePatch(
 
         fun addOpenDebugToVisibleSettingsList(): Boolean {
             val composeRowsMethod = SettingsComposeRowsFingerprint.methodOrNull ?: return false
+            val openDebugField = SupportGroupDefaultStateFingerprint.method.implementation?.instructions
+                ?.firstNotNullOfOrNull { instruction ->
+                    if (instruction.opcode != Opcode.SGET_OBJECT) return@firstNotNullOfOrNull null
+                    val field = (instruction as? ReferenceInstruction)?.reference as? FieldReference
+                        ?: return@firstNotNullOfOrNull null
+                    field.takeIf { it.name == "SECTION_HEADER" }
+                } ?: return false
+
             val sortedListIndex = composeRowsMethod.implementation?.instructions?.indexOfLast {
-                it.opcode == Opcode.INVOKE_STATIC &&
-                    (it as? ReferenceInstruction)?.reference?.toString() ==
-                    "LX/0vnC;->LJLJLLL(Ljava/util/Comparator;Ljava/lang/Iterable;)Ljava/util/List;"
+                if (it.opcode != Opcode.INVOKE_STATIC) return@indexOfLast false
+                val reference = (it as? ReferenceInstruction)?.reference as? MethodReference
+                    ?: return@indexOfLast false
+                reference.name == "LJLJLLL" &&
+                    reference.parameterTypes == listOf("Ljava/util/Comparator;", "Ljava/lang/Iterable;") &&
+                    reference.returnType == "Ljava/util/List;"
             } ?: -1
             if (sortedListIndex < 0) return false
 
@@ -268,7 +279,7 @@ val enableOpenDebugPatch = bytecodePatch(
                 """
                     new-instance v0, Ljava/util/ArrayList;
                     invoke-direct {v0, v$listRegister}, Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V
-                    sget-object v1, LX/12xu;->OPEN_DEBUG:LX/12xu;
+                    sget-object v1, ${openDebugField.definingClass}->OPEN_DEBUG:${openDebugField.type}
                     const/4 v2, 0x0
                     invoke-virtual {v0, v2, v1}, Ljava/util/ArrayList;->add(ILjava/lang/Object;)V
                     move-object v$listRegister, v0
