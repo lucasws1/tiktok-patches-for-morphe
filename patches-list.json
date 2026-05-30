@@ -91,7 +91,7 @@
     },
     {
       "name": "Enable Open Debug",
-      "description": "Uses TikTok's hidden Open Debug settings cell as the entry point for Morphe settings. Supports TikTok 43.8.3.",
+      "description": "Uses TikTok's hidden Open Debug settings cell as the entry point for Morphe settings. Required for the Morphe settings menu to appear. Supports TikTok 43.8.3.",
       "use": true,
       "dependencies": [
         "BytecodePatch"

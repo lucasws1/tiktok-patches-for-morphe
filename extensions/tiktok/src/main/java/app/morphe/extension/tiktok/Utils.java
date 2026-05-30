@@ -48,14 +48,18 @@ public class Utils {
         final boolean darkModeEnabled = isDarkModeEnabled();
 
         TextView title = view.findViewById(android.R.id.title);
-        title.setTextColor(darkModeEnabled
-                ? TEXT_DARK_MODE_TITLE
-                : TEXT_LIGHT_MODE_TITLE);
+        if (title != null) {
+            title.setTextColor(darkModeEnabled
+                    ? TEXT_DARK_MODE_TITLE
+                    : TEXT_LIGHT_MODE_TITLE);
+        }
 
         TextView summary = view.findViewById(android.R.id.summary);
-        summary.setTextColor(darkModeEnabled
-                ? TEXT_DARK_MODE_SUMMARY
-                : TEXT_LIGHT_MODE_SUMMARY);
+        if (summary != null) {
+            summary.setTextColor(darkModeEnabled
+                    ? TEXT_DARK_MODE_SUMMARY
+                    : TEXT_LIGHT_MODE_SUMMARY);
+        }
     }
 }
 

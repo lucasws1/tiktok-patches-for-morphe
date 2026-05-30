@@ -5,6 +5,8 @@
 
 package app.morphe.extension.tiktok.settings.preference;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.preference.Preference;
 import android.preference.PreferenceScreen;
 
@@ -20,6 +22,12 @@ import app.morphe.extension.tiktok.settings.preference.categories.SimSpoofPrefer
 
 @SuppressWarnings("deprecation")
 public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
+
+    private static boolean isDarkModeEnabled(Context context) {
+        final int currentNightMode = context.getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
 
     @Override
     protected void syncSettingWithPreference(
@@ -49,8 +57,7 @@ public class TikTokPreferenceFragment extends AbstractPreferenceFragment {
         restartDialogButtonText = "Restart";
         confirmDialogTitle = "Do you wish to proceed?";
 
-        // App does not use dark mode.
-        Utils.setIsDarkModeEnabled(false);
+        Utils.setIsDarkModeEnabled(isDarkModeEnabled(context));
 
         PreferenceScreen preferenceScreen = getPreferenceManager().createPreferenceScreen(context);
         setPreferenceScreen(preferenceScreen);

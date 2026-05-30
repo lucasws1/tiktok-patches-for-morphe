@@ -25,8 +25,12 @@ public final class FeedItemsFilter {
     );
 
     private static final int MAX_NULL_ITEMS_LOGS = 3;
+    private static final int MAX_BATCH_LOGS = 10;
+    private static final int MAX_ITEM_LOGS = 50;
     private static final AtomicInteger feedItemListNullItemsLogCount = new AtomicInteger();
     private static final AtomicInteger followFeedListNullItemsLogCount = new AtomicInteger();
+    private static final AtomicInteger batchLogCount = new AtomicInteger();
+    private static final AtomicInteger itemLogCount = new AtomicInteger();
 
     private FeedItemsFilter() {}
 
@@ -40,7 +44,7 @@ public final class FeedItemsFilter {
             return;
         }
 
-        if (verbose) {
+        if (verbose && shouldLogBatch()) {
             debugLogBatch("FeedItemList", feedItemList.items);
         }
 
@@ -62,7 +66,7 @@ public final class FeedItemsFilter {
             return;
         }
 
-        if (verbose) {
+        if (verbose && shouldLogBatch()) {
             debugLogBatch("FollowFeedList", followFeedList.mItems);
         }
 
@@ -103,7 +107,7 @@ public final class FeedItemsFilter {
             }
         }
 
-        if (verbose) {
+        if (verbose && removed > 0 && shouldLogBatch()) {
             int removedFinal = removed;
             Logger.printInfo(() -> "[Morphe TikTok FeedFilter] filter(" + source + "): size "
                 + initialSize + " -> " + list.size() + " (removed=" + removedFinal + ")");
@@ -147,10 +151,7 @@ public final class FeedItemsFilter {
     }
 
     private static void logItem(Aweme item, String reason, boolean verbose) {
-        if (!verbose) return;
-
-        String liveEvidence = LiveFilter.getLiveEvidence(item);
-        if (reason == null && "none".equals(liveEvidence)) return;
+        if (!verbose || reason == null || !shouldLogItem()) return;
 
         String shareUrl = item.getShareUrl();
         if (shareUrl != null && shareUrl.length() > 140) {
@@ -176,7 +177,7 @@ public final class FeedItemsFilter {
                 + " aid=" + item.getAid()
                 + " ad=" + item.isAd()
                 + " promo=" + item.isWithPromotionalMusic()
-                + " liveEvidence=" + liveEvidence
+                + " liveEvidence=" + LiveFilter.getLiveEvidence(item)
                 + " story=" + item.getIsTikTokStory()
                 + " image=" + isImage
                 + " photoMode=" + isPhotoMode
@@ -185,6 +186,14 @@ public final class FeedItemsFilter {
                 + " shareUrl=" + (finalShareUrl == null ? "null" : "\"" + finalShareUrl + "\"")
                 + " => " + (reason == null ? "KEEP" : "FILTER(" + reason + ")");
         });
+    }
+
+    private static boolean shouldLogBatch() {
+        return batchLogCount.getAndIncrement() < MAX_BATCH_LOGS;
+    }
+
+    private static boolean shouldLogItem() {
+        return itemLogCount.getAndIncrement() < MAX_ITEM_LOGS;
     }
 
     @FunctionalInterface
