@@ -32,9 +32,9 @@ val commentTranslationPatch = bytecodePatch(
             val managerReadyIndex = implementation!!.instructions.withIndex()
                 .firstOrNull { (_, instruction) ->
                     instruction.getReference<FieldReference>()?.let { reference ->
-                        reference.definingClass == "LX/0QMJ;" &&
-                            reference.name == "LLILLJJLI" &&
-                            reference.type == "LX/0QMK;"
+                        reference.definingClass == "LX/0pct;" &&
+                                reference.name == "LLILLJJLI" &&
+                                reference.type == "LX/0pdX;"
                     } == true
                 }?.index ?: throw PatchException(
                 "Translate comments: could not locate bound comment translation manager.",
@@ -43,8 +43,8 @@ val commentTranslationPatch = bytecodePatch(
             addInstructions(
                 managerReadyIndex + 1,
                 """
-                    iget-object v0, v6, Landroidx/recyclerview/widget/RecyclerView${'$'}ViewHolder;->itemView:Landroid/view/View;
-                    invoke-static {v0, v5}, $EXTENSION_CLASS_DESCRIPTOR->registerCommentCell(Landroid/view/View;Ljava/lang/Object;)V
+                    iget-object v9, v0, Landroidx/recyclerview/widget/RecyclerView${'$'}ViewHolder;->itemView:Landroid/view/View;
+                    invoke-static {v9, v7}, $EXTENSION_CLASS_DESCRIPTOR->registerCommentCell(Landroid/view/View;Ljava/lang/Object;)V
                 """,
             )
         }
@@ -54,7 +54,7 @@ val commentTranslationPatch = bytecodePatch(
                 .firstOrNull { (_, instruction) ->
                     instruction.getReference<FieldReference>()?.let { reference ->
                         reference.definingClass == "Lcom/ss/android/ugc/aweme/comment/model/CommentItemList;" &&
-                            reference.name == "lazySplitItemsParseTask"
+                                reference.name == "lazySplitItemsParseTask"
                     } == true
                 }?.index ?: throw PatchException(
                 "Translate comments: could not locate loaded comment list response.",
@@ -73,11 +73,14 @@ val commentTranslationPatch = bytecodePatch(
             """,
         )
 
-        MultiCommentTranslationCompleteFingerprint.method.addInstructions(
+        MultiCommentTranslationComplete0Fingerprint.method.addInstructions(
             0,
-            """
-                invoke-static {p0}, $EXTENSION_CLASS_DESCRIPTOR->onNativeBatchComplete(Ljava/lang/Object;)V
-            """,
+            "invoke-static {p0}, $EXTENSION_CLASS_DESCRIPTOR->onNativeBatchComplete(Ljava/lang/Object;)V",
+        )
+
+        MultiCommentTranslationComplete1Fingerprint.method.addInstructions(
+            0,
+            "invoke-static {p0}, $EXTENSION_CLASS_DESCRIPTOR->onNativeBatchComplete(Ljava/lang/Object;)V",
         )
     }
 }

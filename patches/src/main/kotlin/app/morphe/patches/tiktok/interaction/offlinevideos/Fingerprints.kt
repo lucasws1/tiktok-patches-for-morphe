@@ -6,8 +6,8 @@ internal object OfflineModeSheetOptionsFingerprint : Fingerprint(
     returnType = "V",
     custom = { method, classDef ->
         classDef.endsWith("/OfflineModeSheetPageAssem;") &&
-            method.name == "<clinit>" &&
-            method.parameterTypes.isEmpty()
+                method.name == "<clinit>" &&
+                method.parameterTypes.isEmpty()
     },
 )
 
@@ -15,25 +15,25 @@ internal object OfflineModeListConstructorFingerprint : Fingerprint(
     returnType = "V",
     custom = { method, classDef ->
         classDef.endsWith("/OfflineModeListVM;") &&
-            method.name == "<init>" &&
-            method.parameterTypes.isEmpty()
+                method.name == "<init>" &&
+                method.parameterTypes.isEmpty()
     },
 )
 
 internal object OfflineModeOptionConfigFingerprint : Fingerprint(
     returnType = "V",
     custom = { method, classDef ->
-        classDef.type == "LX/0seq;" &&
-            method.name == "<clinit>" &&
-            method.parameterTypes.isEmpty()
+        classDef.type == "LX/0pJB;" &&
+                method.name == "<clinit>" &&
+                method.parameterTypes.isEmpty()
     },
 )
 
 internal object OfflineModeOptionEnumFingerprint : Fingerprint(
     returnType = "V",
     custom = { method, classDef ->
-        classDef.type == "LX/0sek;" &&
-            method.name == "<clinit>" &&
-            method.parameterTypes.isEmpty()
+        classDef.type == "LX/0pIs;" &&
+                method.name == "<clinit>" &&
+                method.parameterTypes.isEmpty()
     },
 )

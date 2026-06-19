@@ -72,8 +72,8 @@ internal object CommentTranslationStateEligibilityFingerprint : Fingerprint(
         method.implementation?.instructions?.any { instruction ->
             instruction.getReference<MethodReference>()?.let { reference ->
                 reference.name == "setTranslationState" ||
-                    (reference.parameterTypes == listOf("Lcom/ss/android/ugc/aweme/comment/model/Comment;") &&
-                        reference.returnType == "Z")
+                        (reference.parameterTypes == listOf("Lcom/ss/android/ugc/aweme/comment/model/Comment;") &&
+                                reference.returnType == "Z")
             } == true
         } == true
     },
@@ -166,15 +166,14 @@ internal object TranslationServiceModeStateBroadcastFingerprint : Fingerprint(
 )
 
 internal object MultiCommentTranslationStartFingerprint : Fingerprint(
-    definingClass = "LX/0Pwq;",
+    definingClass = "LX/0QYV;",
     name = "LJFF",
     returnType = "V",
-    parameters = listOf("Ljava/util/List;", "LX/0QML;", "Z"),
+    parameters = listOf("Ljava/util/List;", "LX/0pdE;", "Z"),
     custom = { method, _ ->
         method.implementation?.instructions?.any { instruction ->
             instruction.getReference<MethodReference>()?.let { reference ->
-                reference.definingClass == "Lcom/ss/android/ugc/aweme/comment/translation/CommentMultiTranslationApi\$RealApi;" &&
-                    reference.name == "getMultiTranslation"
+                reference.definingClass == "Lcom/ss/android/ugc/aweme/comment/translation/MultiTranslationBody;"
             } == true
         } == true
     },
@@ -182,33 +181,32 @@ internal object MultiCommentTranslationStartFingerprint : Fingerprint(
 
 internal object BaseCommentCellBindFingerprint : Fingerprint(
     definingClass = "Lcom/ss/android/ugc/aweme/commentv2/commentlist/powercell/BaseCommentCell;",
-    name = "g7",
+    name = "U6",
     returnType = "V",
-    parameters = listOf("LX/0srE;"),
+    parameters = listOf("LX/0paU;"),
     custom = { method, _ ->
         method.implementation?.instructions?.any { instruction ->
             instruction.getReference<FieldReference>()?.let { reference ->
-                reference.definingClass == "LX/0QMJ;" &&
-                    reference.name == "LLILZ" &&
-                    reference.type == "LX/0QML;"
+                reference.definingClass == "LX/0pct;" &&
+                        reference.name == "LLILZ" &&
+                        reference.type == "LX/0pdE;"
             } == true
         } == true
     },
 )
-
 internal object CommentListLoadedFingerprint : Fingerprint(
-    definingClass = "LX/0sqp;",
-    name = "LJIJJLI",
+    definingClass = "LX/0pZZ;",
+    name = "LJIL",
     returnType = "V",
     parameters = listOf(
         "Lcom/ss/android/ugc/aweme/comment/model/CommentItemList;",
         "Z",
         "Ljava/lang/String;",
         "Ljava/lang/String;",
-        "LX/0NJN;",
+        "LX/0O1u;",
         "Ljava/lang/String;",
         "Ljava/lang/String;",
-        "LX/02vj;",
+        "LX/03aZ;",
         "I",
         "I",
     ),
@@ -223,11 +221,19 @@ internal object CommentListLoadedFingerprint : Fingerprint(
     },
 )
 
-internal object MultiCommentTranslationCompleteFingerprint : Fingerprint(
-    definingClass = "LX/0QfV;",
-    name = "run\$2",
+internal object MultiCommentTranslationComplete0Fingerprint : Fingerprint(
+    definingClass = "LX/0RKT;",
+    name = "run\$0",
     returnType = "V",
-    parameters = listOf("LX/0QfV;"),
+    parameters = listOf("LX/0RKT;"),
+    strings = listOf("MultiCommentTranslationTask startTranslate onComplete "),
+)
+
+internal object MultiCommentTranslationComplete1Fingerprint : Fingerprint(
+    definingClass = "LX/0RKT;",
+    name = "run\$1",
+    returnType = "V",
+    parameters = listOf("LX/0RKT;"),
     strings = listOf("MultiCommentTranslationTask startTranslate onComplete "),
 )
 
