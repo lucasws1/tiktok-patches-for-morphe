@@ -63,7 +63,7 @@ internal object StickerPreviewBinderFingerprint : Fingerprint(
         "Ljava/util/Map;",
     ),
     custom = { method, classDef ->
-        if (!classDef.endsWith("/05No;") || method.name != "LIZ") {
+        if (classDef.type != "LX/0FWP;" || method.name != "LIZ") {
             false
         } else {
             val instructions = method.implementation?.instructions
@@ -71,7 +71,6 @@ internal object StickerPreviewBinderFingerprint : Fingerprint(
                 false
             } else {
                 var readsUrlModel = false
-                var bindsActionButton = false
                 var loadsStickerImage = false
 
                 instructions.forEach { instruction ->
@@ -82,15 +81,7 @@ internal object StickerPreviewBinderFingerprint : Fingerprint(
                     }
 
                     instruction.getReference<MethodReference>()?.let { methodReference ->
-                        if (methodReference.definingClass == "LX/05No;" &&
-                            methodReference.name == "LIZIZ" &&
-                            methodReference.parameterTypes == listOf("LX/0Daq;", "LX/05Nn;") &&
-                            methodReference.returnType == "V"
-                        ) {
-                            bindsActionButton = true
-                        }
-
-                        if (methodReference.definingClass == "LX/0zaJ;" &&
+                        if (methodReference.definingClass == "LX/14gc;" &&
                             methodReference.name == "LIZJ"
                         ) {
                             loadsStickerImage = true
@@ -98,7 +89,7 @@ internal object StickerPreviewBinderFingerprint : Fingerprint(
                     }
                 }
 
-                readsUrlModel && bindsActionButton && loadsStickerImage
+                readsUrlModel && loadsStickerImage
             }
         }
     },
