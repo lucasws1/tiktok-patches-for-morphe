@@ -12,17 +12,10 @@ import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 internal object ShareUrlShorteningFingerprint : Fingerprint(
     returnType = "V",
     parameters = listOf(
-        "L",
-        "Ljava/lang/String;",
+        "Lcom/ss/android/ugc/aweme/share/base/model/BaseSharePackage;",
         "Ljava/util/List;",
-        "Ljava/lang/String;",
-        "Z",
-        "I",
     ),
     strings = listOf("share_link_id", "invitation_scene"),
-    custom = { method, _ ->
-        method.parameterTypes.size == 6
-    },
 )
 
 internal object SingleShareShortenResultFingerprint : Fingerprint(

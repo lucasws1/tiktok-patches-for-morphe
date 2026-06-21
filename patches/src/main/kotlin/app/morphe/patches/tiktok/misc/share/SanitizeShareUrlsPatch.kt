@@ -31,18 +31,27 @@ val sanitizeShareUrlsPatch = bytecodePatch(
 
     execute {
         ShareUrlShorteningFingerprint.method.apply {
-            val longUrlRegister = implementation!!.registerCount - 6 + 3
-            addInstructionsWithLabels(
-                0,
-                """
-                    invoke-static {}, $EXTENSION_CLASS_DESCRIPTOR->shouldSanitize()Z
-                    move-result v0
-                    if-eqz v0, :morphe_skip_multi_share_url_sanitization
+            val urlFieldIndex = indexOfFirstInstructionOrThrow {
+                opcode == Opcode.IGET_OBJECT &&
+                        getReference<FieldReference>()?.let { field ->
+                            field.definingClass == "Lcom/ss/android/ugc/aweme/share/base/model/BaseSharePackage;" &&
+                                    field.name == "url" &&
+                                    field.type == "Ljava/lang/String;"
+                        } == true
+            }
+            val urlRegister = getInstruction<Instruction22c>(urlFieldIndex).registerA
 
-                    invoke-static/range { v$longUrlRegister .. v$longUrlRegister }, $EXTENSION_CLASS_DESCRIPTOR->sanitizeShareUrl(Ljava/lang/String;)Ljava/lang/String;
-                    move-result-object v$longUrlRegister
-                """,
-                ExternalLabel("morphe_skip_multi_share_url_sanitization", getInstruction(0)),
+            addInstructionsWithLabels(
+                urlFieldIndex + 1,
+                """
+            invoke-static {}, $EXTENSION_CLASS_DESCRIPTOR->shouldSanitize()Z
+            move-result v0
+            if-eqz v0, :morphe_skip_multi_share_url_sanitization
+
+            invoke-static {v$urlRegister}, $EXTENSION_CLASS_DESCRIPTOR->sanitizeShareUrl(Ljava/lang/String;)Ljava/lang/String;
+            move-result-object v$urlRegister
+        """,
+                ExternalLabel("morphe_skip_multi_share_url_sanitization", getInstruction(urlFieldIndex + 1)),
             )
         }
 
