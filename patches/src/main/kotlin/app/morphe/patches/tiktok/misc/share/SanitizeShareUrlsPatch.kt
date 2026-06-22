@@ -22,7 +22,7 @@ private const val EXTENSION_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/sha
 @Suppress("unused")
 val sanitizeShareUrlsPatch = bytecodePatch(
     name = "Sanitize sharing links",
-    description = "Removes tracking parameters from shared links. (Supports TikTok 43.8.3.)",
+    description = "Removes tracking parameters from shared links. (Supports TikTok 44.9.3.)",
     default = true,
 ) {
     dependsOn(sharedExtensionPatch)

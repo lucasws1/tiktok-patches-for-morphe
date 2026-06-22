@@ -6,7 +6,7 @@
   <a href="LICENSE"><img alt="license" src="https://img.shields.io/badge/license-GPLv3-blue.svg" /></a>
   <a href="https://github.com/MorpheApp/morphe-cli"><img alt="source" src="https://img.shields.io/badge/source-Morphe-00b894.svg" /></a>
   <a href="https://www.android.com/"><img alt="platform" src="https://img.shields.io/badge/platform-Android-3ddc84.svg" /></a>
-  <a href="https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-43-8-3-release/tiktok-43-8-3-2-android-apk-download/"><img alt="TikTok 43.8.3" src="https://img.shields.io/badge/TikTok-43.8.3-ff0050.svg" /></a>
+  <a href="https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-43-8-3-release/tiktok-43-8-3-2-android-apk-download/"><img alt="TikTok 44.9.3" src="https://img.shields.io/badge/TikTok-44.9.3-ff0050.svg" /></a>
 </p>
 
 <p align="center">
@@ -25,7 +25,7 @@
 
 **This repository is a Morphe patch source for TikTok.**
 
-**It continues the work from earlier community TikTok patch sets, including ReVanced, with the patches adapted for Morphe and tested against newer TikTok builds. The current target is the global TikTok package, `com.zhiliaoapp.musically`, on [TikTok `43.8.3`](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-43-8-3-release/tiktok-43-8-3-2-android-apk-download/).**
+**It continues the work from earlier community TikTok patch sets, including ReVanced, with the patches adapted for Morphe and tested against newer TikTok builds. The current target is the global TikTok package, `com.zhiliaoapp.musically`, on [TikTok `44.9.3`](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok-including-musical-ly/tiktok-43-8-3-release/tiktok-43-8-3-2-android-apk-download/).**
 
 The goal is to keep the existing patch set usable while adding more TikTok-focused features over time. Some features are small fixes, some are quality-of-life changes, and some need deeper testing because TikTok changes its internals often.
 
@@ -83,7 +83,7 @@ You can also copy this repository URL and paste it into Morphe's add source fiel
 ## Supported Target
 
 - App: TikTok
-- Version: [`43.8.3`](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok/tiktok-43-8-3-2-release/tiktok-43-8-3-4-android-apk-download/)
+- Version: [`44.9.3`](https://www.apkmirror.com/apk/tiktok-pte-ltd/tik-tok/tiktok-43-8-3-2-release/tiktok-43-8-3-4-android-apk-download/)
 - Package: `com.zhiliaoapp.musically`
 
 Only the global package is declared in Morphe compatibility metadata. The JP package may share some internals, but it is not advertised as supported unless it gets its own proof pass again.

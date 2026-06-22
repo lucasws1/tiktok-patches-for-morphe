@@ -17,13 +17,13 @@ import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 @Suppress("unused")
 val rememberClearDisplayPatch = bytecodePatch(
     name = "Remember clear display",
-    description = "Remembers the clear display configurations in between videos. (Supports TikTok 43.8.3.)",
+    description = "Remembers the clear display configurations in between videos. (Supports TikTok 44.9.3.)",
     default = true,
 ) {
     compatibleWith(*AppCompatibilities.tiktok4383())
 
     execute {
-        // Prevent excessive logging (can cause instability on 43.8.3).
+        // Prevent excessive logging (can cause instability on 44.9.3).
         ClearModeLogCoreFingerprint.methodOrNull?.returnEarly()
         ClearModeLogStateFingerprint.methodOrNull?.returnEarly()
         ClearModeLogPlaytimeFingerprint.methodOrNull?.returnEarly()

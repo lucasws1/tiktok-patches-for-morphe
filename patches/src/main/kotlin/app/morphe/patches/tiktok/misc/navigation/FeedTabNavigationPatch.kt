@@ -14,7 +14,7 @@ private const val EXTENSION_CLASS_DESCRIPTOR = "Lapp/morphe/extension/tiktok/nav
 @Suppress("unused")
 val feedTabNavigationPatch = bytecodePatch(
     name = "Feed tab navigation",
-    description = "Adds controls to choose which top feed tabs are visible. For You stays enabled for stability. Supports TikTok 43.8.3.",
+    description = "Adds controls to choose which top feed tabs are visible. For You stays enabled for stability. Supports TikTok 44.9.3.",
     default = true,
 ) {
     dependsOn(sharedExtensionPatch)

@@ -11,7 +11,7 @@ import app.morphe.patcher.patch.bytecodePatch
 @Suppress("unused")
 val showSeekbarPatch = bytecodePatch(
     name = "Show seekbar",
-    description = "Shows a progress bar for all videos. (Supports TikTok 43.8.3.)",
+    description = "Shows a progress bar for all videos. (Supports TikTok 44.9.3.)",
     default = true,
 ) {
     compatibleWith(*AppCompatibilities.tiktok4383())
